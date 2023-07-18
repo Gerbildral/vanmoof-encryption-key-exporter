@@ -7,20 +7,17 @@ export default async function handler(
 	req: NextApiRequest,
 	res: NextApiResponse
 ) {
-	const { username, password } = JSON.parse(req.body)
-	if (req.method === "POST" && typeof username === "string" && typeof password === "string") {
-		const r = await fetch(API_URL + "authenticate", {
-			method: "POST",
+	if (req.method === "GET" && typeof req.headers.authorization === "string") {
+		const token = req.headers.authorization
+		const r = await fetch(API_URL + "getApplicationToken", {
+			method: "GET",
 			headers: {
 				"Api-Key": API_KEY,
-				"Authorization": `Basic ${Buffer.from(`${username}:${password}`).toString("base64")}`,
-				"User-Agent": "VanMoof/20 CFNetwork/1404.0.5 Darwin/22.3.0"
+				"Authorization": `Bearer ${token}`,
+				"User-Agent": "VanMoof/20 CFNetwork/1404.0.5 Darwin/22.3.0",
 			}
 		})
-		const data: {
-			token: string,
-			refreshToken: string
-		} = await r.json()
+		const data: unknown = await r.json()
 		if (r.status < 400) {
 			res.statusCode = 200
 			return res.json(data)
