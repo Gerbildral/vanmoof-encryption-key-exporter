@@ -27,10 +27,9 @@ export default function Home() {
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				{/* <link rel="icon" href="/favicon.ico" /> */}
 			</Head>
-			<Script defer data-domain="vanoof.grossartig.io" src="https://plausible.grossartig.io/js/script.js" />
+			<script async src="https://analytics.umami.is/script.js" data-website-id="33252e9c-1b84-414e-8f7d-79469ef43640"></script>
 			<ThemeProvider theme={theme}>
 				<CssBaseline />
-				{/* <PlausibleProvider domain="vanoof.grossartig.io" customDomain="https://plausible.grossartig.io" /> */}
 				<main>
 					<div className={styles.main}>
 						<div style={{ margin: "0 auto", maxWidth: "fit-content", marginBottom: "32px" }}>
