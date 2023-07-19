@@ -15,17 +15,18 @@ export default async function handler(
 			method: "POST",
 			headers: {
 				// "Api-Key": API_KEY,
-				"Authorization": `Bearer ${token}`,
+				"Authorization": `${token}`,
 				"User-Agent": "VanMoof/20 CFNetwork/1404.0.5 Darwin/22.3.0",
+				"Content-Type": "application/json"
 			},
 			body: JSON.stringify({
 				"public_key": publicKey
 			})
 		})
-		const data: unknown = await r.text()
+		const data: unknown = await r.json()
 		if (r.status < 400) {
 			res.statusCode = 200
-			return res.send(data)
+			return res.json(data)
 		} else {
 			res.statusCode = r.status
 			return res.send("Error " + r.status)
